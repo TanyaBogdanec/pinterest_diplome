@@ -1,24 +1,24 @@
 from django.db import models
-
+from gjango.contrib.auth.models import User
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, verbose_name='name')
-    created_at = models.DateTimeField(auto_now_add=True)
+    name_category = models.CharField(max_length=100, verbose_name='Name')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created_at')
 
-
-class User(models.Model):
-    name_user = models.CharField(max_length=100, verbose_name='name_user')
-    email = models.EmailField(max_length=150, verbose_name='email')
-    password = models.CharField(max_length=10)
+    def __str__(self):
+        return self.name_category
 
 
 class Image(models.Model):
-    file = models.ImageField()
-    description = models.TextField(max_length=1000)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    file_img = models.ImageField(upload_to='image/', verbose_name='File image')
+    description = models.TextField(max_length=2500)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Category')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User')
     delete = models.BooleanField()
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
-    deleted_at = models.DateTimeField(auto_now_add=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='Uploaded at')
+    updated_at = models.DateTimeField(auto_now_add=True, verbose_name='Updated at')
+    deleted_at = models.DateTimeField(auto_now_add=True, verbose_name='Deleted at')
+
+    def __str__(self):
+        return self.user.username
 
