@@ -1,5 +1,5 @@
 from django.db import models
-from gjango.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name_category = models.CharField(max_length=100, verbose_name='Name')
@@ -10,7 +10,7 @@ class Category(models.Model):
 
 
 class Image(models.Model):
-    file_img = models.ImageField(upload_to='image/', verbose_name='File image')
+    file_img = models.ImageField(upload_to='static/image/', verbose_name='File image')
     description = models.TextField(max_length=2500)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Category')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User')
